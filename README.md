@@ -14,5 +14,5 @@ To test/demo rules in included "JLCPCB Rule Test" PCB:
 4) Click "Run DRC"
 
 Credit for the original rules that I debugged, tested, and added to:
-https://gist.github.com/denniskupec/e163d13b0a64c2044bd259f64659485e
-https://gist.github.com/darkxst/f713268e5469645425eed40115fb8b49
+-https://gist.github.com/denniskupec/e163d13b0a64c2044bd259f64659485e
+-https://gist.github.com/darkxst/f713268e5469645425eed40115fb8b49
