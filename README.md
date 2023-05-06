@@ -1,7 +1,6 @@
 # KiCAD Custom DRC Rules for JLCPCB with Unit Tests
 
 - Supported only in KiCad 7
-- Only applicable to 4-layer 1 oz with JLCPCB
 - Has to make some assumptions since not all JLCPCB rules make sense or they contradict each other
 
 To use the rules in your project:

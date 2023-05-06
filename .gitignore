@@ -1,6 +1,17 @@
 
-JLCPCB Rules Test-backups/
+# General
+*.bck
+*.bak
+﻿.~*
+_autosave-*
+*/#auto_saved_files#
+*/*-backups/*
+*-backups/*
 
+# KiCad
 fp-info-cache
-
-*.zip
+replicate_layout.log
+*.kicad_pro
+!main.kicad_pro
+*.kicad_sch-bak
+*.kicad_pcb-bak

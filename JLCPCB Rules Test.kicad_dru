@@ -1,48 +1,60 @@
 (version 1)
 #Kicad 7
 
+# ----------------------------------- Minimum trace width and spacing --------------------
+### CHANGES
+# 2oz copper
+#(rule "Minimum Trace Width and Spacing"
+#	(constraint track_width (min 8mil))
+#	(constraint clearance (min 8mil))
+#	(condition "A.Type == 'track'"))
+
 # 2-layer, 1oz copper
 #(rule "Minimum Trace Width and Spacing (outer layer)"
 #	(constraint track_width (min 5mil))
 #	(constraint clearance (min 5mil))
 #	(condition "A.Type == 'track'"))
 
-# 4-layer
+# 4-layer , 1oz and 0.5oz copper
 (rule "Minimum Trace Width and Spacing"
 	(constraint track_width (min 3.5mil))
 	(constraint clearance (min 3.5mil))
 	(condition "A.Type == 'track'"))
+###
 
-# silkscreen (Kicad 7 only)
-(rule "Minimum Text"
-	(constraint text_thickness (min 0.15mm))
-	(constraint text_height (min 1mm))
-	(layer "?.Silkscreen"))
-
-(rule "Pad to Silkscreen"
-	(constraint silk_clearance (min 0.14mm))
-	(layer outer)
-	(condition "A.Type == 'pad' && (B.Type == 'text' || B.Type == 'graphic')"))
-
-# edge clearance
-(rule "Trace to Outline"
-	(constraint edge_clearance (min 0.2mm))
-	(condition "A.Type == 'track'"))
-
-# This would override board outline and milled areas
-#(rule "Trace to V-Cut"
-#	(constraint clearance (min 0.4mm))
-#	(condition "A.Type == 'track' && B.Layer == 'Edge.Cuts'"))
-
-# drill/hole size
+# ----------------------------------- Drill/hole size ------------------------------------
 (rule "drill hole size (mechanical)"
-	(constraint hole_size (min 0.2mm) (max 6.3mm)))
+	(constraint hole_size (min 0.15mm) (max 6.3mm)))
 
+### CHANGES
+# standard
 (rule "Minimum Via Diameter and Hole Size"
-	(constraint hole_size (min 0.2mm))
+	(constraint hole_size (min 0.3mm))
 	(constraint via_diameter (min 0.45mm))
 	(constraint disallow buried_via)
 	(condition "A.Type == 'via'"))
+
+# special
+#(rule "Minimum Via Diameter and Hole Size"
+#	(constraint hole_size (min 0.25mm))
+#	(constraint via_diameter (min 0.4mm))
+#	(constraint disallow buried_via)
+#	(condition "A.Type == 'via'"))
+
+# special
+#(rule "Minimum Via Diameter and Hole Size"
+#	(constraint hole_size (min 0.2mm))
+#	(constraint via_diameter (min 0.35mm))
+#	(constraint disallow buried_via)
+#	(condition "A.Type == 'via'"))
+
+# special
+#(rule "Minimum Via Diameter and Hole Size"
+#	(constraint hole_size (min 0.15mm))
+#	(constraint via_diameter (min 0.3mm))
+#	(constraint disallow buried_via)
+#	(condition "A.Type == 'via'"))
+###
 
 (rule "PTH Hole Size"
 	(constraint hole_size (min 0.2mm) (max 6.35mm))
@@ -69,7 +81,7 @@
 	(constraint hole_size (min 1.0mm))
 	(condition "(A.Hole_Size_X != A.Hole_Size_Y) && !A.isPlated()"))
 
-# clearance
+# ----------------------------------- Minimum clearance ----------------------------------
 (rule "hole to hole clearance (different nets)"
 	(constraint hole_to_hole (min 0.5mm))
 	(condition "A.Net != B.Net"))
@@ -105,3 +117,28 @@
 (rule "Pad to Track clearance"
 	(constraint clearance (min 0.2mm))
 	(condition "A.isPlated() && A.Type != 'Via' && B.Type == 'track'"))
+
+# ----------------------------------- Board Outlines -------------------------------------
+### CHANGES
+# edge clearance
+#(rule "Trace to Outline"
+#	(constraint edge_clearance (min 0.3mm))
+#	(condition "A.Type == 'track'"))
+
+# This would override board outline and milled areas
+(rule "Trace to V-Cut"
+	(constraint edge_clearance (min 0.4mm))
+	(condition "A.Type == 'track'"))
+#	(constraint clearance (min 0.4mm))
+#	(condition "A.Type == 'track' && B.Layer == 'Edge.Cuts'"))
+###
+# ----------------------------------- silkscreen (Kicad 7 only) --------------------------
+(rule "Minimum Text"
+	(constraint text_thickness (min 0.15mm))
+	(constraint text_height (min 1mm))
+	(layer "?.Silkscreen"))
+
+(rule "Pad to Silkscreen"
+	(constraint silk_clearance (min 0.15mm))
+	(layer outer)
+	(condition "A.Type == 'pad' && (B.Type == 'text' || B.Type == 'graphic')"))
